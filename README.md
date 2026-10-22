@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Founders Window Care & Detailing — foundersclt.com
 
-## Getting Started
+Marketing site for Founders Window Care & Detailing (Charlotte, NC), built with Next.js 16. Every page is statically generated at build time.
 
-First, run the development server:
+The look follows the live foundersclt.com: Montserrat, deep green bands, and gold buttons and accent words. The copy, photos and 28 pages come from the Oakwood site export.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build (also type-checks)
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| Business details, phone, hours, nav menus, social links | `src/lib/site.ts` |
+| Copy shared by every page (service tiles, 3-step process, areas list) | `src/lib/site.ts` |
+| Per-page copy, one file per page | `src/content/pages/<slug>.ts` |
+| Photos (with alt text and focal points) | `src/lib/images.ts` → files in `public/images/` |
+| Section components | `src/components/blocks/` |
+| Styles | `src/app/globals.css` |
+| Form handling (quote + hiring) | `src/app/actions.ts`, `src/lib/email.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A page file is an ordered list of blocks (`hero`, `intro`, `services`, `faq`, …). The types in `src/lib/content.ts` describe what each block accepts. To reorder sections, reorder the blocks. To add a page, create a file in `src/content/pages/`, register it in `src/content/pages/index.ts`, and it is served at `/<slug>`.
 
-## Learn More
+In hero titles and section headings, `*asterisks*` mark the words shown in gold, for example `"How We Make Your Home Sparkle *Simple*"`.
 
-To learn more about Next.js, take a look at the following resources:
+## Lead emails
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Both forms email the owner through [Resend](https://resend.com). Copy `.env.example` to `.env.local` (or set these in your host's environment settings):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `RESEND_API_KEY`: required. Without it the forms tell visitors to call instead.
+- `LEAD_EMAIL_TO`: who receives leads (default `denis@foundersclt.com`).
+- `LEAD_EMAIL_FROM`: a sender on a domain verified in Resend.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Spam submissions that fill the hidden honeypot field are dropped silently.

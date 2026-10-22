@@ -1,74 +1,84 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SocialIcon, type SocialIconName } from "./icons";
-import { areasServed, footerLinks, site } from "@/lib/site";
+import { areaLinks, businessLinks, legalLinks, serviceLinks, site, type NavLink } from "@/lib/site";
+import { FacebookIcon, InstagramIcon } from "./icons";
+import { QuoteButton } from "./QuoteModal";
+
+const columns: { heading: string; links: NavLink[] }[] = [
+  { heading: "Business", links: businessLinks },
+  { heading: "Our Services", links: serviceLinks },
+  { heading: "Service Areas", links: areaLinks },
+];
+
+const socialIcons = { Facebook: FacebookIcon, Instagram: InstagramIcon };
 
 export function Footer() {
   return (
-    <footer className="footer" id="areas">
-      <div className="wrap">
-        <div className="footer__grid">
-          <div className="footer__brand">
-            <Image src={site.logo} alt={`${site.name} logo`} width={54} height={54} />
-            <p>
-              We bring clarity to every pane — residential, commercial, and auto detailing
-              built on trust, quality, and community pride.
-            </p>
-            <div className="social">
-              {site.social.map((item) => (
-                <a key={item.label} href={item.href} aria-label={item.label}>
-                  <SocialIcon name={item.icon as SocialIconName} />
+    <footer className="footer">
+      <div className="container footer__grid">
+        <div className="footer__card">
+          <Image src={site.logo.src} alt={site.logo.alt} width={150} height={150} />
+          <p>{site.name}, LLC</p>
+          <p>
+            Phone: <a href={site.phone.href}>{site.phone.display}</a>
+          </p>
+          <p>Location: The Greater Charlotte Metro Area</p>
+          <QuoteButton className="btn">Get Quote</QuoteButton>
+          <div className="social">
+            {site.social.map(({ label, href }) => {
+              const Icon = socialIcons[label];
+              return (
+                <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={`${site.name} on ${label}`}>
+                  <Icon size={30} />
                 </a>
-              ))}
+              );
+            })}
+          </div>
+        </div>
+
+        {columns.map((column) => (
+          <div key={column.heading}>
+            <h3>{column.heading}</h3>
+            <div className="footer__links">
+              {column.links.map((link) =>
+                link.href.startsWith("http") ? (
+                  <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link key={link.label} href={link.href}>
+                    {link.label}
+                  </Link>
+                ),
+              )}
             </div>
           </div>
+        ))}
 
-          <div>
-            <h4>Company</h4>
-            <ul className="footer__links">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4>Services</h4>
-            <ul className="footer__links">
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4>Areas Served</h4>
-            <ul className="footer__areas">
-              {areasServed.map((area) => (
-                <li key={area}>
-                  <a href="#">{area}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer__bar">
-          <span>
-            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
-          </span>
-          <nav aria-label="Legal">
-            {footerLinks.legal.map((link) => (
-              <Link key={link.label} href={link.href}>
-                {link.label}
-              </Link>
+        <div>
+          <h3>Operating Hours</h3>
+          <div className="footer__links">
+            {site.hours.days.map((day) => (
+              <p key={day}>
+                {day}: {site.hours.label}
+              </p>
             ))}
-          </nav>
+          </div>
         </div>
+      </div>
+
+      <div className="container footer__bottom">
+        <p>
+          {legalLinks.map((link, i) => (
+            <span key={link.href}>
+              {i > 0 && " | "}
+              <Link href={link.href}>{link.label}</Link>
+            </span>
+          ))}
+        </p>
+        <p>
+          &copy; {new Date().getFullYear()} {site.name}
+        </p>
       </div>
     </footer>
   );

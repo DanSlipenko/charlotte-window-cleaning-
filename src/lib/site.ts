@@ -1,296 +1,152 @@
 /**
- * Single source of truth for site copy, contact details, and section data.
- * Swap the placeholder phone/logo/reviews here and every section follows.
+ * Business details, navigation, and the copy every page shares.
+ * Page-specific copy lives in `src/content/pages`.
  */
 
 export const site = {
   name: "Founders Window Care & Detailing",
-  shortName: "FOUNDERS",
-  tagline: "Window Care & Detailing",
-  url: "https://founderswindowcare.com",
-  logo: "/assets/founders-logo.svg",
-  logoAlt:
-    "Founders Window Care and Detailing logo — a gold crowned oak tree with a house window in its canopy",
+  url: "https://foundersclt.com",
   phone: {
-    display: "(704) 555-0142",
-    href: "tel:+17045550142",
+    display: "(980) 981-7203",
+    href: "tel:9809817203",
+    schema: "+1-980-981-7203",
   },
-  city: "Charlotte, NC",
+  rating: { value: "5.0", count: 99 },
+  logo: { src: "/images/logo.webp", alt: "Founders Window Care & Detailing logo" },
+  googleMaps: "https://maps.google.com/maps?cid=13583743942507051725",
+  hours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "06:00",
+    closes: "21:00",
+    label: "6am to 9pm",
+  },
   social: [
-    { label: "Founders on Instagram", href: "#", icon: "instagram" },
-    { label: "Founders on Facebook", href: "#", icon: "facebook" },
-    { label: "Founders on TikTok", href: "#", icon: "tiktok" },
+    { label: "Facebook", href: "https://www.facebook.com/p/Founders-Window-Care-Detailing-61589818288646/" },
+    { label: "Instagram", href: "https://www.instagram.com/foundersclt/" },
+  ],
+  reviewUrl: "https://founderscltllc.localreview.link/feedback",
+} as const;
+
+export const ratingLabel = `${site.rating.value} Stars On Google (${site.rating.count} Reviews)`;
+
+export type NavLink = { label: string; href: string };
+
+export const serviceLinks: NavLink[] = [
+  { label: "Window Cleaning", href: "/window-cleaning-charlotte-nc" },
+  { label: "Gutter Cleaning", href: "/gutter-cleaning-charlotte-nc" },
+  { label: "Solar Panel Cleaning", href: "/solar-panel-cleaning-charlotte-nc" },
+  { label: "Exterior Window Cleaning", href: "/exterior-window-cleaning-charlotte-nc" },
+  { label: "Interior Window Cleaning", href: "/interior-window-cleaning-charlotte-nc" },
+  { label: "Window Frame & Sill Cleaning", href: "/window-frame-sill-cleaning-charlotte-nc" },
+  { label: "Residential Window Cleaning", href: "/residential-window-cleaning-charlotte-nc" },
+  { label: "Skylight Cleaning", href: "/skylight-cleaning-charlotte-nc" },
+  { label: "Commercial Window Cleaning", href: "/commercial-window-cleaning-charlotte-nc" },
+  { label: "Hard Water Stain Removal", href: "/hard-water-stain-removal-charlotte-nc" },
+];
+
+/** Charlotte itself is served by the home page. */
+export const areaLinks: NavLink[] = [
+  { label: "Charlotte", href: "/" },
+  { label: "Myers Park", href: "/myers-park-nc" },
+  { label: "Cotswold", href: "/cotswold-nc" },
+  { label: "Dilworth", href: "/dilworth-nc" },
+  { label: "Ballantyne", href: "/ballantyne-nc" },
+  { label: "SouthPark", href: "/southpark-nc" },
+  { label: "Matthews", href: "/matthews-nc" },
+  { label: "Pineville", href: "/pineville-nc" },
+  { label: "Weddington", href: "/weddington-nc" },
+  { label: "Marvin", href: "/marvin-nc" },
+  { label: "Plaza Midwood", href: "/plaza-midwood-nc" },
+];
+
+export const businessLinks: NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "We're Hiring", href: "/hiring" },
+  { label: "Review Us", href: site.reviewUrl },
+];
+
+export const legalLinks: NavLink[] = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms-conditions" },
+];
+
+/** Italic line under every call-to-action and form. */
+export const trustLine = "Certified | Insured | Trusted";
+
+/** Green band under each hero. */
+export const bandText = "Proudly Serving The Greater Charlotte Metro Area";
+
+/** The four tiles in every "services" block; images can be swapped per page. */
+export const serviceTiles = [
+  {
+    title: "Professional Window Cleaning",
+    text: "Enjoy crystal-clear views with streak-free, spotless windows.",
+    items: [
+      "Interior & Exterior Window Cleaning",
+      "Window Frames & Sills Detailing",
+      "Skylight Cleaning",
+      "French Pane & Storm Window Services",
+    ],
+  },
+  {
+    title: "Comprehensive Gutter Care",
+    text: "Protect your home's foundation and landscaping from water damage.",
+    items: [
+      "Full Gutter & Downspout Clearing",
+      "Obstruction & Clog Removal",
+      "Exterior Gutter Washing",
+      "Scheduled Gutter Maintenance Plans",
+    ],
+  },
+  {
+    title: "Efficient Solar Panel Cleaning",
+    text: "Maximize energy output and extend the life of your solar investment.",
+    items: [
+      "Residential Solar Panel Cleaning",
+      "Commercial Solar Panel Cleaning",
+      "Photovoltaic Panel Cleaning",
+      "Deionized Water Cleaning",
+    ],
+  },
+  {
+    title: "Exterior Detailing & Washing",
+    text: "Renew your home's curb appeal with a deep, thorough clean.",
+    items: [
+      "House Washing & Siding Cleaning",
+      "Pressure & Power Washing (Driveways, Patios)",
+      "Soft Washing (Delicate Surfaces)",
+      "Deck & Fence Cleaning",
+    ],
+  },
+];
+
+/** Headings mark their gold accent words with `*asterisks*`. */
+export const processSection = {
+  heading: "How We Make Your Home Sparkle *Simple*",
+  steps: [
+    {
+      icon: "phone",
+      title: "Reach Out",
+      text: "Call or message us with your cleaning needs. We'll gather necessary details to understand your project.",
+    },
+    {
+      icon: "clipboard",
+      title: "We Visit & Quote",
+      text: "We visit your property for an accurate assessment and provide a transparent, detailed quote for our services.",
+    },
+    {
+      icon: "badge",
+      title: "Project Delivered",
+      text: "Our skilled crew meticulously performs the work, ensuring stunning results and your complete satisfaction.",
+    },
   ],
 } as const;
 
-export const navLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Our Services", href: "/#services" },
-  { label: "Reviews", href: "/#reviews" },
-  { label: "Memberships", href: "/#memberships" },
-  { label: "Areas Served", href: "/#areas" },
-] as const;
-
-/** The drawer carries one extra link the desktop pill has no room for. */
-export const drawerLinks = [
-  ...navLinks.slice(0, 4),
-  { label: "Our Process", href: "/#process" },
-  navLinks[4],
-] as const;
-
-export type Service = {
-  title: string;
-  blurb: string;
-  /** Wide tiles span two columns in the bento grid. */
-  wide?: boolean;
-  image: { alt: string; note: string; src?: string };
+export const serviceArea = {
+  heading: "Proudly Serving Charlotte Metro Area",
+  areas: areaLinks.map((area) => area.label),
+  footer: "And all areas in between!",
 };
-
-export const services: Service[] = [
-  {
-    title: "Exterior Window Cleaning",
-    blurb:
-      "Hand-detailed outside glass, frames wiped, every drop cleared from the sill.",
-    wide: true,
-    image: {
-      alt: "Technician using a water-fed pole to clean the tall exterior windows of a two-story brick home",
-      note: "1300 × 800",
-    },
-  },
-  {
-    title: "Interior Window Cleaning",
-    blurb: "Crystal-clear views and a fresh look for every room in the house.",
-    wide: true,
-    image: {
-      alt: "Technician in shoe covers cleaning a living room window from the inside while sunlight fills the room",
-      note: "1300 × 800",
-    },
-  },
-  {
-    title: "Screen Cleaning",
-    blurb: "Screens washed, dried, and reseated square so the view comes back.",
-    image: {
-      alt: "Window screens laid out and being washed down on a driveway",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Track Detailing",
-    blurb: "Grit vacuumed and tracks scrubbed so your sliders move like new.",
-    image: {
-      alt: "Close-up of a gloved hand scrubbing grit out of a sliding window track",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Gutter Cleaning",
-    blurb: "Debris hauled, downspouts flushed, and photos sent when it's clear.",
-    image: {
-      alt: "Technician on a ladder scooping leaves out of a residential gutter",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Solar Panel Cleaning",
-    blurb: "A deionized rinse that clears pollen and film so output recovers.",
-    image: {
-      alt: "Rooftop solar array being rinsed with purified water, downtown skyline in the distance",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Pressure Washing",
-    blurb: "Driveways and patios back to their original color, no etching.",
-    image: {
-      alt: "Pressure washer stripping years of grey off a concrete driveway, clean stripe clearly visible",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Soft Washing",
-    blurb: "Gentle treatment that lifts algae from siding, brick, and roofing.",
-    image: {
-      alt: "Low-pressure soft wash treatment being applied to algae-streaked vinyl siding",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Auto Detailing",
-    blurb:
-      "Interior and exterior detailing at your home, glass polished to zero haze.",
-    image: {
-      alt: "Detailer buffing the door glass of a dark sedan in a residential driveway",
-      note: "640 × 800",
-    },
-  },
-  {
-    title: "Skylights & High Glass",
-    blurb: "Proper poles and ladder work for second-story and transom panes.",
-    image: {
-      alt: "Technician on a ladder reaching a second-story skylight above a stairwell",
-      note: "640 × 800",
-    },
-  },
-];
-
-/**
- * Membership explainer video. Set `embedUrl` (e.g. a YouTube/Vimeo embed link)
- * and the play button swaps the poster for the player; until then the poster
- * slot stands in.
- */
-export const membershipVideo = {
-  embedUrl: null as string | null,
-  poster: {
-    src: undefined as string | undefined,
-    alt: "Founders owner standing in front of a Charlotte home introducing the membership program",
-    note: "Video thumbnail · 1600 × 900",
-  },
-} as const;
-
-export type Plan = {
-  tag: string;
-  price: string;
-  unit: string;
-  featured?: boolean;
-  /** `included: false` renders the muted cross-out row. */
-  features: { label: string; included: boolean }[];
-};
-
-const perkLabels = [
-  "Free GlassGuard rain coating",
-  "7-day rain guarantee",
-  "Free hard water removal",
-];
-
-export const plans: Plan[] = [
-  {
-    tag: "Monthly",
-    price: "$120 off",
-    unit: "Per cleaning",
-    featured: true,
-    features: perkLabels.map((label) => ({ label, included: true })),
-  },
-  {
-    tag: "Quarterly",
-    price: "$80 off",
-    unit: "Per cleaning",
-    features: perkLabels.map((label) => ({ label, included: true })),
-  },
-  {
-    tag: "Biannual",
-    price: "$40 off",
-    unit: "Per cleaning",
-    features: perkLabels.map((label) => ({ label, included: false })),
-  },
-];
-
-export type Review = {
-  name: string;
-  meta: string;
-  stars: number;
-  quote: string;
-};
-
-export const reviews: Review[] = [
-  {
-    name: "Marcus R.",
-    meta: "Dilworth · Google review",
-    stars: 5,
-    quote:
-      "They did interior and exterior on 22 windows plus all the screens on our Dilworth bungalow. Arrived when they said, laid down runners without being asked, and spent real time on the old wavy glass upstairs. First time in years I've been able to see the yard properly.",
-  },
-  {
-    name: "Priya L.",
-    meta: "Property manager, South End",
-    stars: 5,
-    quote:
-      "We manage six retail suites and had gone through three vendors in two years. Founders has hit every scheduled Tuesday for eight months straight, and the one time a crew ran late they called me before I noticed. That's the whole review.",
-  },
-  {
-    name: "Dana T.",
-    meta: "Matthews · Google review",
-    stars: 5,
-    quote:
-      "Booked window cleaning and added the driveway once I saw the quote was flat, not hourly. The concrete came back two shades lighter and nothing got blasted or streaked. Fair price, no upsell, and they texted photos of the gutters when they were done.",
-  },
-];
-
-export type Step = {
-  title: string;
-  body: string;
-  image: { alt: string; note: string; src?: string };
-};
-
-export const steps: Step[] = [
-  {
-    title: "Prep",
-    body: "We walk the property with you, flag the problem glass, lay runners inside, and move whatever needs moving. Nothing starts until you know exactly what the visit covers and what it costs.",
-    image: {
-      alt: "Technician walking a homeowner around the property, pointing out problem glass before the job starts",
-      note: "Step image · 900 × 900",
-    },
-  },
-  {
-    title: "Wash",
-    body: "Purified water and hand tools on every pane. No harsh chemicals near your landscaping, your pets, or your paint — just the right solution worked across the glass and pulled clean.",
-    image: {
-      alt: "Technician working a squeegee across a large pane with purified water",
-      note: "Step image · 900 × 900",
-    },
-  },
-  {
-    title: "Detail",
-    body: "Perfection is in the details. Frames, sills, tracks, and the corners everyone else skips. Every edge polished and every surface inspected, so the glass looks right from any angle.",
-    image: {
-      alt: "Technician on a step ladder detailing the frame and corners of an exterior window",
-      note: "Step image · 900 × 900",
-    },
-  },
-  {
-    title: "Inspect",
-    body: "We walk it again together in daylight before we pack up. Anything you spot, we fix on the spot. That is the entire guarantee, and it is why most of our work comes from neighbors.",
-    image: {
-      alt: "Homeowner and technician inspecting finished windows together in daylight",
-      note: "Step image · 900 × 900",
-    },
-  },
-];
-
-export const areasServed = [
-  "Charlotte, NC",
-  "Ballantyne, NC",
-  "SouthPark, NC",
-  "Myers Park, NC",
-  "Dilworth, NC",
-  "Matthews, NC",
-  "Mint Hill, NC",
-  "Huntersville, NC",
-  "Cornelius, NC",
-  "Waxhaw, NC",
-  "Concord, NC",
-  "Fort Mill, SC",
-] as const;
-
-export const footerLinks = {
-  company: [
-    { label: "About us", href: "/about" },
-    { label: "Our work", href: "#" },
-    { label: "Reviews", href: "/#reviews" },
-    { label: "Memberships", href: "/#memberships" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "/#quote" },
-  ],
-  services: [
-    { label: "Exterior windows", href: "/#services" },
-    { label: "Interior windows", href: "/#services" },
-    { label: "Screens & tracks", href: "/#services" },
-    { label: "Pressure & soft washing", href: "/#services" },
-    { label: "Auto detailing", href: "/#services" },
-    { label: "Holiday lighting", href: "/#services" },
-  ],
-  legal: [
-    { label: "Terms of service", href: "#" },
-    { label: "Privacy policy", href: "#" },
-    { label: "Sitemap", href: "#" },
-  ],
-} as const;
