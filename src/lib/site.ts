@@ -7,9 +7,9 @@ export const site = {
   name: "Founders Window Care & Detailing",
   url: "https://foundersclt.com",
   phone: {
-    display: "(980) 981-7203",
-    href: "tel:9809817203",
-    schema: "+1-980-981-7203",
+    display: "(704) 471-3282",
+    href: "tel:7044713282",
+    schema: "+1-704-471-3282",
   },
   rating: { value: "5.0", count: 99 },
   logo: { src: "/images/logo.webp", alt: "Founders Window Care & Detailing logo" },
