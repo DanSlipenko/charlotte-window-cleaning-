@@ -23,7 +23,7 @@ npm run lint
 | Photos (with alt text and focal points) | `src/lib/images.ts` → files in `public/images/` |
 | Section components | `src/components/blocks/` |
 | Styles | `src/app/globals.css` |
-| Form handling (quote + hiring) | `src/app/actions.ts`, `src/lib/email.ts` |
+| Form handling (quote + hiring) | `src/lib/leads.ts`, `src/components/LeadForm.tsx` |
 
 A page file is an ordered list of blocks (`hero`, `intro`, `services`, `faq`, …). The types in `src/lib/content.ts` describe what each block accepts. To reorder sections, reorder the blocks. To add a page, create a file in `src/content/pages/`, register it in `src/content/pages/index.ts`, and it is served at `/<slug>`.
 
@@ -31,10 +31,10 @@ In hero titles and section headings, `*asterisks*` mark the words shown in gold,
 
 ## Lead emails
 
-Both forms email the owner through [Resend](https://resend.com). Copy `.env.example` to `.env.local` (or set these in your host's environment settings):
+Both forms email the owner through [Web3Forms](https://web3forms.com), submitted from the visitor's browser (Web3Forms only accepts server-side submissions on a paid plan). Copy `.env.example` to `.env.local` (or set it in your host's environment settings):
 
-- `RESEND_API_KEY`: required. Without it the forms tell visitors to call instead.
-- `LEAD_EMAIL_TO`: who receives leads (default `denis@foundersclt.com`).
-- `LEAD_EMAIL_FROM`: a sender on a domain verified in Resend.
+- `WEB3FORMS_ACCESS_KEY`: required. Leads go to the inbox the key was created for. Without it the forms tell visitors to call instead. The value is built into the site, so redeploy after changing it.
+
+The key is public by design. In the Web3Forms dashboard, restrict it to `foundersclt.com` so other sites can't use it.
 
 Spam submissions that fill the hidden honeypot field are dropped silently.

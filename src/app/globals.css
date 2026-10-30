@@ -98,6 +98,7 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
 .lead-form__consent input { flex: none; width: 15px; height: 15px; margin: 3px 0 0; accent-color: var(--gold); }
 .lead-form__consent a { color: inherit; }
 .lead-form .btn { min-height: 66px; margin-top: 14px; }
+.lead-form [aria-invalid="true"] { border-color: #e04848; box-shadow: 0 0 0 2px #ffc2c2; }
 .form-error { color: #ffc2c2; font-size: 15px; }
 .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
