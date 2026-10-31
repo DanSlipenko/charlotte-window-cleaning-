@@ -22,6 +22,17 @@ function formatPhone(input: string) {
   return match ? `(${match[1]}) ${match[2]}-${match[3]}` : "";
 }
 
+/**
+ * Formats a phone number while it's typed ("704" → "(704) 4" → "(704) 471-3282")
+ * and keeps at most 10 digits. A leading 1 or +1 is dropped: no US area code starts with 1.
+ */
+export function formatPhoneAsTyped(input: string) {
+  const digits = input.replace(/\D/g, "").replace(/^1/, "").slice(0, 10);
+  if (digits.length > 6) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  if (digits.length > 3) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return digits;
+}
+
 const emailPattern = /^[^\s@]+@(?:[a-z\d-]+\.)+[a-z]{2,}$/i;
 
 /** A house number and a street name, e.g. "123 Main St". */

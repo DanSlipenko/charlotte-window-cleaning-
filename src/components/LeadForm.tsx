@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useActionState, useId, useRef, type FormEvent } from "react";
 import type { FormKind } from "@/lib/content";
-import { sendLead, type LeadState } from "@/lib/leads";
+import { formatPhoneAsTyped, sendLead, type LeadState } from "@/lib/leads";
 
 /** A text input whose label is read by screen readers; sighted visitors see the placeholder. */
 function Field({ label, ...input }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
@@ -69,8 +69,11 @@ export function LeadForm({ kind = "quote" }: { kind?: FormKind }) {
           type="tel"
           placeholder="Phone*"
           required
-          maxLength={40}
           autoComplete="tel"
+          onChange={(event) => {
+            const formatted = formatPhoneAsTyped(event.currentTarget.value);
+            if (formatted !== event.currentTarget.value) event.currentTarget.value = formatted;
+          }}
           {...check("phone")}
         />
       </div>
