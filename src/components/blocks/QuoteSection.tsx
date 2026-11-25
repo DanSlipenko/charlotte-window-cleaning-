@@ -1,6 +1,6 @@
 import { CallButton } from "@/components/CallButton";
-import { FormCard } from "@/components/FormCard";
 import { Highlight } from "@/components/Highlight";
+import { QuoteCard } from "@/components/QuoteCard";
 import type { BlockOf } from "@/lib/content";
 
 export function QuoteSection({ eyebrow, heading, paragraphs }: BlockOf<"quote">) {
@@ -20,7 +20,7 @@ export function QuoteSection({ eyebrow, heading, paragraphs }: BlockOf<"quote">)
           <CallButton label="Tap To Call Now" className="btn btn--lg quote__call" />
           <p className="quote__line">Or submit the form.</p>
         </div>
-        <FormCard title="Contact Us" />
+        <QuoteCard />
       </div>
     </section>
   );

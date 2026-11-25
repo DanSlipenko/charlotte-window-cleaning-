@@ -22,7 +22,7 @@ export type FormKind = "quote" | "hiring";
 export type Block =
   | {
       type: "hero";
-      /** `home` is the tall landing hero with call/message buttons. */
+      /** `home` is the tall landing hero with a call button and the quote form beside it. */
       variant: "home" | "interior";
       image: ImageKey;
       title: string;

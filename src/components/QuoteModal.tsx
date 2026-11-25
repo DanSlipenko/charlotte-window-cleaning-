@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
 import { CallButton } from "./CallButton";
-import { FormCard } from "./FormCard";
 import { CloseIcon } from "./icons";
+import { QuoteCard } from "./QuoteCard";
 
 const OpenQuoteContext = createContext<() => void>(() => {});
 
@@ -20,7 +20,7 @@ export function QuoteModalProvider({ children }: { children: React.ReactNode }) 
   const opener = useRef<HTMLElement | null>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
 
-  // A successful submit navigates to /thank-you; the dialog should not follow.
+  // Close on navigation (e.g. the back button); the dialog should not follow.
   const pathname = usePathname();
   const [shownOn, setShownOn] = useState(pathname);
   if (pathname !== shownOn) {
@@ -70,7 +70,7 @@ export function QuoteModalProvider({ children }: { children: React.ReactNode }) 
             </div>
             <CallButton label={`Call ${site.phone.display}`} />
             <p>Or send us a message below.</p>
-            <FormCard />
+            <QuoteCard eager />
           </section>
         </div>
       )}

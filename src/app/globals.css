@@ -71,8 +71,14 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
 .hero__rating { margin-top: 28px; padding-block: 22px; border-block: 2px solid #fff; font-size: 26px; font-weight: 600; }
 .hero__rating .stars { margin-right: 12px; color: var(--gold); letter-spacing: 2px; }
 .hero__actions { display: grid; justify-items: center; gap: 22px; margin-top: 36px; }
-.hero__secondary { padding: 0; border: 0; background: none; color: #fff; font-size: 20px; text-decoration: underline; text-underline-offset: 3px; }
 .hero--interior { min-height: 0; padding-block: 100px; }
+/* Landing hero: copy on the left, quote form on the right. */
+.hero--home { padding: 70px 20px; text-align: left; }
+.hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(400px, 500px); align-items: center; gap: clamp(40px, 5vw, 80px); width: min(1260px, 100%); margin-inline: auto; }
+.hero--home .hero__content { max-width: 680px; margin: 0; }
+.hero--home .hero__rating { font-size: 22px; }
+.hero--home .hero__actions { justify-items: start; }
+.hero--home .btn--lg { padding-inline: 48px; }
 
 .band { padding: 20px; background: var(--green); color: #fff; font-size: 24px; font-weight: 600; text-align: center; }
 
@@ -84,6 +90,21 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
 .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; }
 
 /* Lead forms */
+/*
+ * Quote form: Flyra's form in an iframe. QuoteCard sets the iframe's height from
+ * Flyra's reports (no transition: a report taken mid-animation would stick).
+ * The card's min-height holds the space of step 1 (~445-480px) until the first
+ * report, and `data-measuring` hides the form while a shorter step is measured.
+ */
+.quote-card { position: relative; width: 100%; min-height: 440px; scroll-margin-top: 24px; border-radius: 16px; background: #fff; box-shadow: 0 28px 70px rgb(0 0 0 / 32%); color: var(--ink); text-align: left; }
+.quote-card[data-ready] { min-height: 0; }
+.quote-card__badge { position: absolute; top: -14px; right: 24px; z-index: 1; padding: 6px 14px; border: 3px solid #fff; border-radius: 99px; background: var(--gold); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.quote-card__frame { display: block; width: 100%; height: 120px; border: 0; border-radius: 16px; background: #fff; transition: opacity .25s ease; }
+.quote-card[data-measuring] .quote-card__frame { opacity: 0; transition: none; }
+.section .quote-card { box-shadow: 0 10px 40px rgb(0 0 0 / 14%); }
+.modal .quote-card { margin-top: 24px; box-shadow: none; }
+
+/* Job application form */
 .form-card { padding: 30px 20px 27px; border-radius: var(--radius); background: var(--green); color: #fff; }
 .form-card__title { margin-bottom: 22px; font-size: 24px; font-weight: 700; text-align: center; }
 .form-card__note { margin-bottom: 18px; font-size: 16px; text-align: center; }
@@ -103,6 +124,7 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
 .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
 .intro__phone { margin-top: 32px; }
+.intro--solo { max-width: 900px; text-align: center; }
 
 /* Services */
 .services-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px; }
@@ -190,7 +212,6 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
 .modal__brand img { width: 110px; height: 110px; margin-inline: auto; }
 .modal > .btn { margin-top: 12px; }
 .modal > p { margin: 16px 0; }
-.modal .form-card { text-align: left; }
 
 @media (max-width: 1100px) {
   .nav, .header__phone { display: none; }
@@ -204,6 +225,19 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
   .mobile-nav details > div { display: grid; padding-left: 16px; border-left: 3px solid var(--gold); }
   .mobile-nav details a { font-weight: 400; }
   .mobile-nav .btn { margin-top: 12px; }
+}
+
+@media (max-width: 980px) {
+  /* Stacked: headline, then the form, then the rest of the copy. */
+  .hero--home { min-height: 0; padding: 40px 20px 50px; }
+  .hero__inner { grid-template-columns: minmax(0, 1fr); gap: 18px; width: min(640px, 100%); }
+  .hero--home .hero__content { display: contents; }
+  .hero--home .hero__content > * { margin-top: 0; }
+  .hero--home h1 { order: 1; }
+  .hero__form { order: 2; margin-block: 14px 6px; }
+  .hero--home .hero__sub { order: 3; }
+  .hero--home .hero__rating { order: 4; }
+  .hero--home .hero__actions { order: 5; }
 }
 
 @media (max-width: 900px) {
@@ -225,7 +259,9 @@ body { background: #fff; color: var(--ink); font-family: var(--font); font-size:
   .hero__sub { font-size: 17px; }
   .hero__rating { font-size: 19px; }
   .hero__actions .btn { width: 100%; }
-  .hero__secondary { font-size: 17px; }
+  .hero--home { padding: 28px 16px 40px; }
+  .hero--home .hero__rating { font-size: 18px; }
+  .hero--home .btn--lg { padding-inline: 20px; }
   .btn--lg { width: 100%; padding-inline: 20px; font-size: 22px; }
   .band { font-size: 20px; }
   .section { padding-block: 56px; }

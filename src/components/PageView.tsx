@@ -14,23 +14,25 @@ import { QuoteSection } from "./blocks/QuoteSection";
 import { Services } from "./blocks/Services";
 
 export function PageView({ page }: { page: Page }) {
+  // The landing hero carries the quote form, so the intro below it skips its copy.
+  const quoteInHero = page.blocks.some((block) => block.type === "hero" && block.variant === "home");
   return (
     <main id="main">
       {page.blocks.map((block, i) => (
-        <BlockView key={i} block={block} />
+        <BlockView key={i} block={block} quoteInHero={quoteInHero} />
       ))}
     </main>
   );
 }
 
-function BlockView({ block }: { block: Block }) {
+function BlockView({ block, quoteInHero }: { block: Block; quoteInHero: boolean }) {
   switch (block.type) {
     case "hero":
       return <Hero {...block} />;
     case "band":
       return <Band />;
     case "intro":
-      return <Intro {...block} />;
+      return <Intro {...block} quoteInHero={quoteInHero} />;
     case "services":
       return <Services {...block} />;
     case "cta":
