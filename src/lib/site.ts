@@ -11,7 +11,8 @@ export const site = {
     href: "tel:7044713282",
     schema: "+1-704-471-3282",
   },
-  rating: { value: "5.0", count: 99 },
+  /** `count` is a whole number for Google's structured data; the page shows it as "110+". */
+  rating: { value: "5.0", count: 110 },
   logo: { src: "/images/logo.webp", alt: "Founders Window Care & Detailing logo" },
   googleMaps: "https://maps.google.com/maps?cid=13583743942507051725",
   hours: {
@@ -29,7 +30,7 @@ export const site = {
   quoteFormId: "0ky8zly4",
 } as const;
 
-export const ratingLabel = `${site.rating.value} Stars On Google (${site.rating.count} Reviews)`;
+export const ratingLabel = `${site.rating.value} Stars On Google (${site.rating.count}+ Reviews)`;
 
 export type NavLink = { label: string; href: string };
 
